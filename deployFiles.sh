@@ -4,8 +4,8 @@ while getopts k:h:s: flag
 do
     case "${flag}" in
         k) key=${OPTARG};;
-        h) hostname=${OTPARG};;
-        s) servic=${OPTARG};;
+        h) hostname=${OPTARG};;
+        s) service=${OPTARG};;
     esac
 done
 
@@ -29,12 +29,13 @@ fi
 
 printf "\n----> Deploying files for $service to $hostname with $key\n"
 
-#Step 1
-printf "\n----> Clear out the previous distribution to the target.\n"
-ssh -i "$key" ubuntu@hostname << ENDSSH
+# Step 1
+printf "\n----> Clear out the previous distribution on the target.\n"
+ssh -i "$key" ubuntu@$hostname << ENDSSH
 rm -rf services/${service}/public
+mkdir -p services/${service}/public
 ENDSSH
 
 # Step 2
 printf "\n----> Copy the distribution package to the target.\n"
-scp -r -i "$key" * ubuntu@hostname:service/$service/public
+scp -r -i "$key" * ubuntu@$hostname:services/$service/public
