@@ -11,25 +11,21 @@ done
 
 if [[ -z "$key" ]]; then
     printf "\nMissing required parameter: key\n"
-    printf " syntax: deployFiles.sh -k <pem key file> -h <hostname> -s <service>\n\n"
     exit 1
 fi
 if [[ -z "$hostname" ]]; then
     printf "\nMissing required parameter: hostname\n"
-    printf " syntax: deployFiles.sh -k <pem key file> -h <hostname> -s <service>\n\n"
     exit 1
 fi
 if [[ -z "$key" ]]; then
     printf "\nMissing required parameter: service\n"
-    printf " syntax: deployFiles.sh -k <pem key file> -h <hostname> -s <service>\n\n"
     exit 1
 fi
 
-# if [[ -z "$key" || -z "$hostname" || -z "$service" ]]; then
-#     printf "\nMissing required parameter.\n"
-#     printf " syntax: deployFiles.sh -k <pem key file> -h <hostname> -s <service>\n\n"
-#     exit 1
-# fi
+if [[ -z "$key" || -z "$hostname" || -z "$service" ]]; then
+    printf " syntax: deployFiles.sh -k <pem key file> -h <hostname> -s <service>\n\n"
+    exit 1
+fi
 
 printf "\n----> Deploying files for $service to $hostname with $key\n"
 
