@@ -6,7 +6,7 @@ do
         k) key=${OPTARG};;
         h) hostname=${OTPARG};;
         s) servic=${OPTARG};;
-    esace
+    esac
 done
 
 if [[ -z "$key" || -z "$hostname" || -z "$service" ]]; then
