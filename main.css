@@ -35,3 +35,11 @@ menu {
 menu .nav-item {
     padding: 0 0.3em;
 }
+
+footer {
+    flex: 0 25px;
+}
+
+footer a {
+    float: center;
+}
