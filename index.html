@@ -29,14 +29,17 @@
             <hr />
         </header>
 
-        <main>
-            <h1>Welcome</h1>
-            <p>Login to play</p>
-            <form method="get" action="play.html">
-                <label for="name">Name</label>
-                <input type="text" id="name" placeholder="Your name here" />
-                <button type="submit">Login</button>
-            </form>
+        <main class="container-fluid bg-info text-center">
+            <div class="bg-dark" id="home_div">
+                <h1>Welcome</h1>
+                <p>Hit "Login" to play</p>
+                <form method="get" action="play.html">
+                    <!-- label for="name">Name</label-->
+                    <input type="text" id="name" placeholder="player name" />
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p>If you play without a name, no high score will be recorded.</p>
+            </div>
         </main>
 
         <footer class="bg-dark text-light text-muted">

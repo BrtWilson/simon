@@ -14,6 +14,7 @@ main {
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+    overflow: auto;
 }
 
 menu {
@@ -40,4 +41,15 @@ footer {
 
 footer a {
     float: right;
+}
+
+.center {
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateX(-50%);
+}
+
+#home_div {
+    padding: 50px 50px 50px 50px;
+    border-radius: 70px;
 }
