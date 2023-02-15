@@ -16,10 +16,6 @@ main {
     justify-content: space-around;
 }
 
-footer {
-    flex: 0 30px;
-}
-
 menu {
     flex: 1;
     display: flex;
@@ -38,8 +34,10 @@ menu .nav-item {
 
 footer {
     flex: 0 25px;
+    float: left;
+    margin: 0 30px;
 }
 
 footer a {
-    float: center;
+    float: right;
 }
