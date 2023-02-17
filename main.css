@@ -117,9 +117,9 @@ footer a {
     border: thick solid rgb(100, 100, 83);
 }
 
-controls {
+.controls {
     position: absolute;
-    border-radius:  50%;
+    border-radius: 50%;
     width: 200px;
     height: 200px;
     background-color: black;
