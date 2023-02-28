@@ -3,6 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content=""width=device-width, initial-scale=1.0" />
+
+        <script src="login.js"></script>
+
         <link rel="stylesheet" href="main.css" />
         <!-- Include bootstrap CSS framework -->
         <link
@@ -35,7 +38,7 @@
                 <form method="get" action="play.html">
                     <!-- label for="name">Name</label-->
                     <input type="text" id="name" placeholder="player name" />
-                    <button type="submit" class="btn btn-primary">Login</button>
+                    <button type="submit" class="btn btn-primary" onclick="login()">Login</button>
                 </form>
                 <p>If you play without a name, no high score will be recorded.</p>
             </div>
