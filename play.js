@@ -19,25 +19,24 @@ class Button {
         this.el.style.backgroundColor = background;
     }
 
-    async press(playSound) {
+    async press(volume) {
         this.paint(50);
-        if (playSound) {
-            await new Promise((resolve) => {
-                this.sound.onended = resolve;
-                this.sound.play();
-            });
-        }
-        else {
-            await DelayNode(100);
-        }
+        await this.play(volume);
         this.paint(25);
-        await delay(100);
+    }
+
+    async play(volume = 1.0) {
+        this.sound.volume = volume;
+        await new Promise((resolve) => {
+            this.sound.onended = resolve;
+            this.sound.play();
+        });
     }
 }
 
 class Game {
     buttons;
-    allowPlay;
+    allowPlayer;
     sequence;
     playerPlaybackPos;
     mistakeSound;
@@ -71,14 +70,14 @@ class Game {
                     this.playerPlaybackPos = 0;
                     this.addButton();
                     this.updateScore(this.sequence.length - 1);
-                    await this.playSequence(500);
+                    await this.playSequence();
                 }
                 this.allowPlayer = true;
             }
             else {
                 this.saveScore(this.sequence.length - 1);
                 this.mistakeSound.play();
-                await this.buttonDance();
+                await this.buttonDance(2);
             }
         }
     }
@@ -94,14 +93,14 @@ class Game {
         this.updateScore('--');
         await this.buttonDance(1);
         this.addButton();
-        await this.playSequence(500);
+        await this.playSequence();
         this.allowPlayer = true;
     }
 
-    async buttonDance(laps = 5) {
+    async buttonDance(laps = 1) {
         for (let step = 0; step < laps; step++) {
             for (const btn of this.buttons.values()) {
-                await btn.press(false);
+                await btn.press(0.0);
             }
         }
     }
@@ -116,12 +115,11 @@ class Game {
         scoreEl.textContent = score;
     }
 
-    async playSequence(delayMs = 0) {
-        if (delayMs > 0) {
-            await delay(delayMs);
-        }
+    async playSequence() {
+        await delay(500);
         for (const btn of this.sequence) {
-            await btn.press(true);
+            await btn.press(1.0);
+            await delay(100);
         }
     }
 
