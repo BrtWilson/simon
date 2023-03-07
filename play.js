@@ -20,7 +20,8 @@ class Button {
 
   async press(volume) {
     this.paint(50);
-    await this.play(volume);
+    await delay(500);
+    //await this.play(volume);
     this.paint(25);
   }
 
@@ -29,7 +30,7 @@ class Button {
     this.sound.volume = volume;
     await new Promise((resolve) => {
       this.sound.onended = resolve;
-      this.sound.play();
+      //this.sound.play();
     });
   }
 }
@@ -74,13 +75,14 @@ class Game {
         this.allowPlayer = true;
       } else {
         this.saveScore(this.sequence.length - 1);
-        this.mistakeSound.play();
+        //this.mistakeSound.play();
         await this.buttonDance(2);
       }
     }
   }
 
   async reset() {
+    debugger;
     this.allowPlayer = false;
     this.playerPlaybackPos = 0;
     this.sequence = [];
@@ -163,6 +165,8 @@ class Game {
   }
 }
 
+debugger
+
 const game = new Game();
 
 function delay(milliseconds) {
@@ -176,3 +180,5 @@ function delay(milliseconds) {
 function loadSound(filename) {
   return new Audio('assets/' + filename);
 }
+
+console.log("End of Play.js");
