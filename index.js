@@ -3,10 +3,31 @@ const app = express();
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
+app.use(express.json()); // parses json object to javascript object (e.g. req.body)
+
 app.use(express.static('public'));  
     // : Install the middleware to = 
     //      look in public in response to any request that might be a file
 
+
+// Consider the main objects in your application. What objects do you need to retrieve? 
+//    (Usually create-user and login-user) -> something to get and something to update/upload
+//      These will determine what endpoints you need.
+// : 
+//  Router:
+var apiRouter = express.Router();
+app.use(`/api`, apiRouter);
+
+// GetScores
+apiRouter.get('/scores', (_req, res) => {
+    res.send(getScores());
+});
+
+// SubmitScore
+apiRouter.post('/score', (req, res) => {
+    let scores_ = updateScores(req.body);
+    res.send(scores_);
+});
 
 
 
@@ -18,3 +39,31 @@ app.use((_req, res) => {
 app.listen(port, () => {
     console.log(`Listening on port ${port}`);
 });
+
+
+
+// API Retrieval Stand-in Functions
+function getScores() {
+    return [];
+}
+
+function updateScores(newScore) {
+    let scores = getScores();
+    let found = false;
+    for (const [i, prevScore] of scores.entries()) {
+        if (newScore.score > prevScore.score) {
+            scores.splice(i, 0, newScore);
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        scores.push(newScore);
+    }
+
+    if (scores.length > 15) {
+        scores.length = 15; // truncates array at size 10
+    }
+    return scores;
+}

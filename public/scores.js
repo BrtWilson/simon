@@ -1,9 +1,22 @@
-function loadScores() {
+const { response } = require("express");
+
+async function loadScores() {
     let scores = [];
-    const scoresText = localStorage.getItem('scores');
-    if (scoresText) {
-        scores = JSON.parse(scoresText);
+
+    // Get scores from API:
+    try {
+        const response = await fetch('/api/scores');
+        scores = await response.json();
+        localStorage.setItem('scores', JSON.stringify(scores));
     }
+    catch {
+        // As backup, just read scores from local storage
+        const scoresText = localStorage.getItem('scores');
+        if (scoresText) {
+            scores = JSON.parse(scoresText);
+        }
+    }
+
 
     const tableBodyEl = document.querySelector('#scores');
 
