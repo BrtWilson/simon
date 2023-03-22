@@ -1,5 +1,3 @@
-const { response } = require("express");
-
 async function loadScores() {
     let scores = [];
 
@@ -17,7 +15,7 @@ async function loadScores() {
         }
     }
 
-
+    // Display Scores
     const tableBodyEl = document.querySelector('#scores');
 
     if (scores.length) {

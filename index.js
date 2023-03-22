@@ -43,9 +43,26 @@ app.listen(port, () => {
 
 
 // API Retrieval Stand-in Functions
-function getScores() {
-    return defaultScores;
-}
+// function getScores() {
+//     return defaultScores;
+// }
+scores = [
+    {
+        "score": 27,
+        "date": "Oct 20, 2019",
+        "name": "Ash Ketchum"
+    },
+    {
+        "score": 19,
+        "date": "Aug 2, 2001",
+        "name": "Ash Ketchum"
+    },
+    {
+        "score": 13,
+        "date": "July 4, 2020",
+        "name": "Capt. Slade"
+    }
+]
 
 function updateScores(newScore) {
     let scores = getScores();
@@ -67,22 +84,3 @@ function updateScores(newScore) {
     }
     return scores;
 }
-
-
-defaultScores = [
-    {
-        "score": 27,
-        "date": "Oct 20, 2019",
-        "name": "Ash Ketchum"
-    },
-    {
-        "score": 19,
-        "date": "Aug 2, 2001",
-        "name": "Ash Ketchum"
-    },
-    {
-        "score": 13,
-        "date": "July 4, 2020",
-        "name": "Capt. Slade"
-    }
-]
