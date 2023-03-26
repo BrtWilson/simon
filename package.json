@@ -10,6 +10,7 @@
   "license": "ISC",
   "homepage": "https://github.com/BrtWilson/simon#readme",
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "mongodb": "^5.1.0"
   }
 }

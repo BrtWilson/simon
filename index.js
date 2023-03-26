@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+const DB = require('./database.js');
 
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
 
@@ -20,12 +21,16 @@ app.use(`/api`, apiRouter);
 
 // GetScores
 apiRouter.get('/scores', (_req, res) => {
-    res.send(getScores());
+    const scores = await DB.getHighScores();
+    res.send(scores);
+    //res.send(getScores());
 });
 
 // SubmitScore
 apiRouter.post('/score', (req, res) => {
-    let scores_ = updateScores(req.body);
+    DB.addScore(req.body);
+    const scores_ = await DB.getHighScores();
+    //let scores_ = updateScores(req.body);
     res.send(scores_);
 });
 
@@ -46,41 +51,41 @@ app.listen(port, () => {
 // function getScores() {
 //     return defaultScores;
 // }
-scores = [
-    {
-        "score": 27,
-        "date": "Oct 20, 2019",
-        "name": "Ash Ketchum"
-    },
-    {
-        "score": 19,
-        "date": "Aug 2, 2001",
-        "name": "Ash Ketchum"
-    },
-    {
-        "score": 13,
-        "date": "July 4, 2020",
-        "name": "Capt. Slade"
-    }
-]
+// scores = [
+//     {
+//         "score": 27,
+//         "date": "Oct 20, 2019",
+//         "name": "Ash Ketchum"
+//     },
+//     {
+//         "score": 19,
+//         "date": "Aug 2, 2001",
+//         "name": "Ash Ketchum"
+//     },
+//     {
+//         "score": 13,
+//         "date": "July 4, 2020",
+//         "name": "Capt. Slade"
+//     }
+// ]
 
-function updateScores(newScore) {
-    let scores = getScores();
-    let found = false;
-    for (const [i, prevScore] of scores.entries()) {
-        if (newScore.score > prevScore.score) {
-            scores.splice(i, 0, newScore);
-            found = true;
-            break;
-        }
-    }
+// function updateScores(newScore) {
+//     let scores = getScores();
+//     let found = false;
+//     for (const [i, prevScore] of scores.entries()) {
+//         if (newScore.score > prevScore.score) {
+//             scores.splice(i, 0, newScore);
+//             found = true;
+//             break;
+//         }
+//     }
 
-    if (!found) {
-        scores.push(newScore);
-    }
+//     if (!found) {
+//         scores.push(newScore);
+//     }
 
-    if (scores.length > 15) {
-        scores.length = 15; // truncates array at size 10
-    }
-    return scores;
-}
+//     if (scores.length > 15) {
+//         scores.length = 15; // truncates array at size 10
+//     }
+//     return scores;
+// }
